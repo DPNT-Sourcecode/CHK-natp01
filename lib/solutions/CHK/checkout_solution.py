@@ -4,6 +4,37 @@
 # skus = unicode string
 def checkout(skus):
     #assumre for now that SKUs are given in the format of capital letters seperated by NO spaces "AABBC"
+    prices = {
+        "A" : 50,
+        "B" : 30,
+        "C" : 20,
+        "D" : 15,
+        "E" : 40,
+        "F" : 10,
+        "G" : 20,
+        "H" : 10,
+        "I" : 35,
+        "J" : 60,
+        "K" : 80,
+        "L" : 90,
+        "M" : 15,
+        "N" : 40,
+        "O" : 10,
+        "P" : 50,
+        "Q" : 30,
+        "R" : 50,
+        "S" : 30,
+        "T" : 20,
+        "U" : 40,
+        "V" : 50,
+        "W" : 20,
+        "X" : 90,
+        "Y" : 10,
+        "Z" : 50
+    }
+
+    special_offers = {"A","B","E","F","H","K","N",""}
+    
     contents = {}
 
     if not skus:
@@ -111,4 +142,5 @@ def test_f():
     skus = "AAABBBAACDBDEEEEEFFF" #5A4B1C2D5E2F
 
     assert checkout(skus) == 515
+
 
