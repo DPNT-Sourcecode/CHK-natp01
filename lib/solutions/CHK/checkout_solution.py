@@ -21,17 +21,32 @@ def checkout(skus):
         num = contents[item]
         if item == 'A':
             total += (num // 3) * 130 + (num % 3) * 50
-        if item == 'B':
+        elif item == 'B':
             total += (num // 2) * 45 + (num % 2) * 530
-        if item == 'C':
+        elif item == 'C':
             total+= 20*num
-        if item == 'D':
+        elif item == 'D':
             total+= 15*num
 
     return total
 
 def test_checkout():
     skus = []
-    assert checkout
+    assert checkout(skus) == -1
+
+    skus.append("a")
+    assert checkout(skus) == -1
+    skus[0] = 1
+    assert checkout(skus) == -1
+
+    skus = []
+    skus.append("A")
+    assert checkout(skus) == 50
+
+    skus.append("B")
+    assert checkout(skus) == 80
+
+    skus.extend(["C","D"])
+    assert checkout(skus) == 
 
 
