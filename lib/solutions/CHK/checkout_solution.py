@@ -30,6 +30,9 @@ def checkout(skus):
 
         del contents["E"]
 
+    if "F" in contents:
+        contents["F"] -= contents["F"] // 3
+
     for item in contents:
         num = contents[item]
         if item == 'A': # first apply 5A for 200 offer since it is a better deal for the customer
@@ -42,6 +45,7 @@ def checkout(skus):
             total+= 20*num
         elif item == 'D':
             total+= 15*num
+        elif item == "F":
 
     return total
 
@@ -93,3 +97,4 @@ def more_complicated():
     skus = "AAABBBAACDBDEEEEE" #5A4B1C2D5E
 
     assert checkout(skus) == 495
+
