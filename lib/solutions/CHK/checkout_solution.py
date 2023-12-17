@@ -22,7 +22,7 @@ def checkout(skus):
         if item == 'A':
             total += (num // 3) * 130 + (num % 3) * 50
         elif item == 'B':
-            total += (num // 2) * 45 + (num % 2) * 530
+            total += (num // 2) * 45 + (num % 2) * 30
         elif item == 'C':
             total+= 20*num
         elif item == 'D':
@@ -37,6 +37,8 @@ def test_checkout():
     skus="a"
     assert checkout(skus) == -1
     skus="1"
+    assert checkout(skus) == -1
+    skus=1
     assert checkout(skus) == -1
 
     skus = []
