@@ -71,15 +71,15 @@ def checkout(skus):
 
     total = 0
 
-    for item in :
-        num = contents["E"]
-        total+= 40*num
-        b_remove = contents["E"] // 2
+    # for item in :
+    #     num = contents["E"]
+    #     total+= 40*num
+    #     b_remove = contents["E"] // 2
 
-        if "B" in contents:
-            contents["B"] = contents["B"] - b_remove if contents["B"] > b_remove else  0
+    #     if "B" in contents:
+    #         contents["B"] = contents["B"] - b_remove if contents["B"] > b_remove else  0
 
-        del contents["E"]
+    #     del contents["E"]
 
         # if item == 'A': # first apply 5A for 200 offer since it is a better deal for the customer
         #     total += (num//5) * 200
@@ -100,29 +100,28 @@ def checkout(skus):
     for item in contents:
         num_of_item = contents[item]
 
-        #No offer on item
-        if item not in special_offers_money and item not in special_offers_items:
-            total += prices[item] * num_of_item
-
         #Free item discount
-        elif item in special_offers_items:
+        if item in special_offers_items:
             item_being_free = special_offers_items[item][0][1]
             num_to_trigger_offer = special_offers_items[item][0][0]
-            total+= prices[item]*num
+            total+= prices[item]*num_of_item
             item_free_remove_quantity = num_of_item // num_to_trigger_offer
 
             if item_being_free in contents:
                 contents[item_being_free] = contents[item_being_free] - item_free_remove_quantity if contents[item_being_free] > item_free_remove_quantity else  0
 
-            del contents[item]
+            contents[item] = 0
+
+            continue
 
         #Money Discount
-        else:
-        #     total += (num//5) * 200
-        #     num -= 5 * (num // 5)
-        #     total += (num // 3) * 130 + (num % 3) * 50
+        elif item in special_offers_money:
             for discount in special_offers_money[item]:
-                total += (num_of_item // discount[0])
+                total += (num_of_item // discount[0]) * discount[1]
+                num_of_item -= discount[0] * (num_of_item // discount[0])
+
+        total += prices[item] * num_of_item
+
     return total
 
 def test_checkout():
@@ -186,6 +185,7 @@ def test_f():
     skus = "AAABBBAACDBDEEEEEFFF" #5A4B1C2D5E2F
 
     assert checkout(skus) == 515
+
 
 
 
