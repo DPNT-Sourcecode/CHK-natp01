@@ -89,11 +89,16 @@ def checkout(skus):
 
     #Group offers
     group_offer_count = 0
+    group_offer_price = 45
+    group_offer_quant = 3
+
     for item in group_offer_items:
         if item in contents:
             num_of_item = contents[item]
 
-            group_offer_count += 
+            group_offer_count += num_of_item
+            total += group_offer_price * (group_offer_count // group_offer_quant)
+            group_offer_count -= group_offer_count // group_offer_quant
 
 
     for item in contents:
