@@ -72,6 +72,7 @@ def checkout(skus):
     total = 0
 
     #Free item discount
+    #(for now this works only when the free items are not items that at a certain quantity have free items too since that can give inaccurate results)
     for item in special_offers_items:
         if item in contents:
             num_of_item = contents[item]
@@ -174,5 +175,10 @@ def test_f():
     skus = "AAABBBAACDBDEEEEEFFF" #5A4B1C2D5E2F
 
     assert checkout(skus) == 515
+
+def test_random_checks():
+    skus = 3*"A" + 10*"H" + 3*"R" + 4*"Q"
+
+    assert checkout(skus) == 440
 
 
