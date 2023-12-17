@@ -185,9 +185,3 @@ def test_f():
     skus = "AAABBBAACDBDEEEEEFFF" #5A4B1C2D5E2F
 
     assert checkout(skus) == 515
-
-
-
-
-
-
