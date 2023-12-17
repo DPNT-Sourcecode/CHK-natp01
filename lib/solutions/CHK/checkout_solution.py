@@ -107,10 +107,13 @@ def checkout(skus):
     items_remain = group_offer_count
     for item in group_offer_items[::-1]:
         if item in contents:
-            if :
-                contents[item] = group_offer_count
-            else:
+            if items_remain == 0:
                 contents[item] = 0
+            elif items_remain <= contents[item]:
+                print("put all = ", item)
+                contents[item] = items_remain
+            else:
+                items_remain -= contents[item]
 
     for item in contents:
         num_of_item = contents[item]
@@ -210,6 +213,7 @@ def test_simple_group_offer():
     skus = "STXYZ"
 
     assert checkout(skus) == 82
+
 
 
 
