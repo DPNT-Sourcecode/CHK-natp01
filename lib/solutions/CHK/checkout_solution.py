@@ -3,15 +3,15 @@
 # noinspection PyUnusedLocal
 # skus = unicode string
 def checkout(skus):
-    #assumre for now that SKUs are given in the format of capital letters seperated by spaces "A A B B B C"
+    #assumre for now that SKUs are given in the format of capital letters seperated by NO spaces "AABBC"
     contents = {}
 
-    if not skus or not isinstance(skus, str):
+    if not isinstance(skus, str):
         return -1
     
-    for el in skus.split():
+    for el in skus:
         if el < 'A' or el > 'Z':
-            return -1
+            continue
         
         contents[el] = contents.get(el, 0) + 1
 
@@ -45,14 +45,14 @@ def test_checkout():
     skus = "A"
     assert checkout(skus) == 50
 
-    skus += " B"
+    skus += "B"
     assert checkout(skus) == 80
 
-    skus += " C D"
+    skus += "CD"
     assert checkout(skus) == 115
 
-    skus += " A A"
+    skus += "AA"
     assert checkout(skus) == 195
 
-    skus += " B B"
+    skus += "BB"
     assert checkout(skus) == 240
