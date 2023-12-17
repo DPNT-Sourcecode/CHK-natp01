@@ -21,8 +21,9 @@ def checkout(skus):
     total = 0
 
     if "E" in contents:
+        num = contents["E"]
         total+= 40*num
-        b_remove = E // 2
+        b_remove = contents["E"] // 2
 
         if "B" in contents:
             contents["B"] = contents["B"] - b_remove if contents["B"] > b_remove else  0
@@ -33,7 +34,7 @@ def checkout(skus):
         num = contents[item]
         if item == 'A': # first apply 5A for 200 offer since it is a better deal for the customer
             total += (num//5) * 200
-            num -= num // 5
+            num -= 5 * (num // 5)
             total += (num // 3) * 130 + (num % 3) * 50
         elif item == 'B':
             total += (num // 2) * 45 + (num % 2) * 30
@@ -79,4 +80,11 @@ def test_new_a_offer():
 
     assert checkout(skus) == 330
 
+    skus = "AAAAAAAAA"
 
+    assert checkout(skus) == 380
+    
+def test_e_offer():
+    skus = "ABCDEE"
+
+    assert checkout(skus) == 165
