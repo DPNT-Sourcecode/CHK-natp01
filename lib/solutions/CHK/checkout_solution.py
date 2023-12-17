@@ -88,3 +88,8 @@ def test_e_offer():
     skus = "ABCDEE"
 
     assert checkout(skus) == 165
+
+def more_complicated():
+    skus = "AAABBBAACDBDEEEEE" #5A4B1C2D5E
+
+    assert checkout(skus) == 495
