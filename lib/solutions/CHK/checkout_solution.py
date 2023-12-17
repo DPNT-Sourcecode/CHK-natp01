@@ -106,7 +106,6 @@ def checkout(skus):
     #put the remaining quantity of items that were present in the group offer and the basket to the cheapest possible items
     items_remain = group_offer_count
     for item in group_offer_items[::-1]:
-        print("Start = ", item, contents)
         if item in contents:
             if items_remain == 0:
                 contents[item] = 0
@@ -115,7 +114,6 @@ def checkout(skus):
                 items_remain = 0
             else:
                 items_remain -= contents[item]
-        print("End = ", item, contents, items_remain)
 
     for item in contents:
         num_of_item = contents[item]
@@ -219,9 +217,9 @@ def test_simple_group_offer():
 def test_more_complex_group_offer():
     skus = "SSTXYZZZ"
 
-    assert checkout(skus) == 102
+    assert checkout(skus) == 127
 
+def test_mixed_complex_group_offer():
+    skus = "SSTXYZZZ" + 3*"A" + 10*"H" + 3*"R" + 4*"Q"
 
-
-
-
+    assert checkout(skus) == 127 + 440
