@@ -9,11 +9,11 @@ def checkout(skus):
     if not skus:
         return -1
     
-    for char in skus.split():
-        if char < 'A' or char > 'Z':
+    for el in skus.split():
+        if el < 'A' or el > 'Z':
             return -1
         
-        contents[char] = contents.get(char, 0) + 1
+        contents[el] = contents.get(el, 0) + 1
 
     total = 0
 
@@ -47,6 +47,12 @@ def test_checkout():
     assert checkout(skus) == 80
 
     skus.extend(["C","D"])
-    assert checkout(skus) == 
+    assert checkout(skus) == 115
+
+    skus.extend(["A", "A"])
+    assert checkout(skus) == 195
+
+    skus.extend(["B", "B"])
+    assert checkout(skus) == 240
 
 
