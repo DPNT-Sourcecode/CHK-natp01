@@ -71,37 +71,10 @@ def checkout(skus):
 
     total = 0
 
-    # for item in :
-    #     num = contents["E"]
-    #     total+= 40*num
-    #     b_remove = contents["E"] // 2
-
-    #     if "B" in contents:
-    #         contents["B"] = contents["B"] - b_remove if contents["B"] > b_remove else  0
-
-    #     del contents["E"]
-
-        # if item == 'A': # first apply 5A for 200 offer since it is a better deal for the customer
-        #     total += (num//5) * 200
-        #     num -= 5 * (num // 5)
-        #     total += (num // 3) * 130 + (num % 3) * 50
-        # elif item == 'B':
-        #     total += (num // 2) * 45 + (num % 2) * 30
-        # elif item == 'C':
-        #     total+= 20*num
-        # elif item == 'D':
-        #     total+= 15*num
-        # elif item == "F":
-        #     total+= 10*num
-
-    # if "F" in contents:
-    #     contents["F"] -= contents["F"] // 3
-
-    for item in contents:
-        num_of_item = contents[item]
-
-        #Free item discount
-        if item in special_offers_items:
+    #Free item discount
+    for item in special_offers_items:
+        if item in contents:
+            num_of_item = contents[item]
             item_being_free = special_offers_items[item][0][1]
             num_to_trigger_offer = special_offers_items[item][0][0]
             total+= prices[item]*num_of_item
@@ -112,7 +85,9 @@ def checkout(skus):
 
             contents[item] = 0
 
-            print(total)
+    for item in contents:
+        num_of_item = contents[item]
+        if num_of_item == 0:
             continue
 
         #Money Discount
@@ -129,6 +104,14 @@ def checkout(skus):
 
         print(total)
     return total
+
+
+
+
+
+
+
+
 
 def test_checkout():
     skus = ""
@@ -191,4 +174,5 @@ def test_f():
     skus = "AAABBBAACDBDEEEEEFFF" #5A4B1C2D5E2F
 
     assert checkout(skus) == 515
+
 
