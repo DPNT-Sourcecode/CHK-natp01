@@ -99,16 +99,15 @@ def checkout(skus):
 
     for item in contents:
         num_of_item = contents[item]
-        item_being_free = special_offers_items["item"][0][1]
-        num_to_trigger_offer = special_offers_items["item"][0][0]
 
         #No offer on item
         if item not in special_offers_money and item not in special_offers_items:
-            total += prices[item] * num
+            total += prices[item] * num_of_item
 
         #Free item discount
         elif item in special_offers_items:
-            num = contents[item]
+            item_being_free = special_offers_items[item][0][1]
+            num_to_trigger_offer = special_offers_items[item][0][0]
             total+= prices[item]*num
             item_free_remove_quantity = num_of_item // num_to_trigger_offer
 
@@ -119,7 +118,11 @@ def checkout(skus):
 
         #Money Discount
         else:
-            
+        #     total += (num//5) * 200
+        #     num -= 5 * (num // 5)
+        #     total += (num // 3) * 130 + (num % 3) * 50
+            for discount in special_offers_money[item]:
+                total += (num_of_item // discount[0])
     return total
 
 def test_checkout():
@@ -183,6 +186,7 @@ def test_f():
     skus = "AAABBBAACDBDEEEEEFFF" #5A4B1C2D5E2F
 
     assert checkout(skus) == 515
+
 
 
 
