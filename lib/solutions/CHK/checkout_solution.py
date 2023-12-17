@@ -115,12 +115,16 @@ def checkout(skus):
             continue
 
         #Money Discount
+        #        "F":[(3,20)],
         elif item in special_offers_money:
             for discount in special_offers_money[item]:
                 total += (num_of_item // discount[0]) * discount[1]
                 num_of_item -= discount[0] * (num_of_item // discount[0])
 
-        total += prices[item] * num_of_item
+            total += prices[item] * num_of_item
+
+        else:
+            total += prices[item] * num_of_item
 
     return total
 
