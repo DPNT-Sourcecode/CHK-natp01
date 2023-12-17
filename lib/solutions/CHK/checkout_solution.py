@@ -33,7 +33,11 @@ def checkout(skus):
         "Z" : 50
     }
 
-    special_offers = {"A","B","E","F","H","K","N",""}
+    special_offers = {
+        "A" : [(5,200),(3,130)],
+        "B":[(2,45)],
+        "E":[(2,"B")],
+        "F","H","K","N","P","Q","R","U","V"}
     
     contents = {}
 
@@ -61,23 +65,26 @@ def checkout(skus):
 
         del contents["E"]
 
+        # if item == 'A': # first apply 5A for 200 offer since it is a better deal for the customer
+        #     total += (num//5) * 200
+        #     num -= 5 * (num // 5)
+        #     total += (num // 3) * 130 + (num % 3) * 50
+        # elif item == 'B':
+        #     total += (num // 2) * 45 + (num % 2) * 30
+        # elif item == 'C':
+        #     total+= 20*num
+        # elif item == 'D':
+        #     total+= 15*num
+        # elif item == "F":
+        #     total+= 10*num
+
     if "F" in contents:
         contents["F"] -= contents["F"] // 3
 
     for item in contents:
         num = contents[item]
-        if item == 'A': # first apply 5A for 200 offer since it is a better deal for the customer
-            total += (num//5) * 200
-            num -= 5 * (num // 5)
-            total += (num // 3) * 130 + (num % 3) * 50
-        elif item == 'B':
-            total += (num // 2) * 45 + (num % 2) * 30
-        elif item == 'C':
-            total+= 20*num
-        elif item == 'D':
-            total+= 15*num
-        elif item == "F":
-            total+= 10*num
+        if item not in special_offers:
+            total += prices[item] * num
 
     return total
 
@@ -142,5 +149,3 @@ def test_f():
     skus = "AAABBBAACDBDEEEEEFFF" #5A4B1C2D5E2F
 
     assert checkout(skus) == 515
-
-
