@@ -90,13 +90,13 @@ def checkout(skus):
             contents[item] = 0
 
     #Group offers
+    # this are defined before the execution of the code so that if more group offers come in the future we can include the whole section in a loop with different values for the offer
     group_offer_count = 0
     group_offer_price = 45
     group_offer_quant = 3
 
     for item in group_offer_items:
         if item in contents:
-            print(item)
             num_of_item = contents[item]
 
             group_offer_count += num_of_item
@@ -110,8 +110,8 @@ def checkout(skus):
             if items_remain == 0:
                 contents[item] = 0
             elif items_remain <= contents[item]:
-                print("put all = ", item)
                 contents[item] = items_remain
+                items_remain = 0
             else:
                 items_remain -= contents[item]
 
@@ -213,6 +213,11 @@ def test_simple_group_offer():
     skus = "STXYZ"
 
     assert checkout(skus) == 82
+
+def test_more_complex_group_offer():
+    skus = "SSTXYZZZ"
+
+    assert checkout(skus) == 102
 
 
 
