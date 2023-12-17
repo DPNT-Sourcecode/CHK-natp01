@@ -6,7 +6,7 @@ def checkout(skus):
     #assumre for now that SKUs are given in the format of capital letters seperated by spaces "A A B B B C"
     contents = {}
 
-    if not skus:
+    if not skus or not isinstance(skus, str):
         return -1
     
     for el in skus.split():
@@ -34,25 +34,23 @@ def test_checkout():
     skus = []
     assert checkout(skus) == -1
 
-    skus.append("a")
+    skus="a"
     assert checkout(skus) == -1
-    skus[0] = 1
+    skus="1"
     assert checkout(skus) == -1
 
     skus = []
-    skus.append("A")
+    skus = "A"
     assert checkout(skus) == 50
 
-    skus.append("B")
+    skus += " B"
     assert checkout(skus) == 80
 
-    skus.extend(["C","D"])
+    skus += " C D"
     assert checkout(skus) == 115
 
-    skus.extend(["A", "A"])
+    skus += " A A"
     assert checkout(skus) == 195
 
-    skus.extend(["B", "B"])
+    skus += " B B"
     assert checkout(skus) == 240
-
-
