@@ -25,7 +25,9 @@ def checkout(skus):
         b_remove = E // 2
 
         if "B" in contents:
-            contents["B"] = contents["B"] - b_remove 
+            contents["B"] = contents["B"] - b_remove if contents["B"] > b_remove else  0
+
+        del contents["E"]
 
     for item in contents:
         num = contents[item]
@@ -69,5 +71,10 @@ def test_checkout():
 
     skus = "ABCa"
     assert checkout(skus) == -1
+
+def test_e_offer():
+    skus = "AAABBCEE"
+
+    assert checkout(skus) == 
 
 
