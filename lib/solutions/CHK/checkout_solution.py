@@ -33,19 +33,25 @@ def checkout(skus):
         "Z" : 50
     }
 
-    special_offers = {
+    # (A,B) quantity A for B money
+    special_offers_money = {
         "A" : [(5,200),(3,130)],
         "B":[(2,45)],
-        "E":[(2,"B")],
         "F":[(3,20)],
         "H":[(10,80),(5,45)],
         "K":[(2,150)],
-        "N":[(3,"M")],
         "P":[(5,200)],
         "Q":[(3,80)],
-        "R":[(3,"Q")],
         "U":[(4,120)],
-        "V":[()]}
+        "V":[(2,90),(3,130)]
+    }
+
+    # (A,B) quantity A get a B free
+    special_offers_items = {
+        "E":[(2,"B")],
+        "N":[(3,"M")],
+        "R":[(3,"Q")],
+    }
     
     contents = {}
 
@@ -63,7 +69,7 @@ def checkout(skus):
 
     total = 0
 
-    if "E" in contents:
+    for item in :
         num = contents["E"]
         total+= 40*num
         b_remove = contents["E"] // 2
@@ -157,3 +163,4 @@ def test_f():
     skus = "AAABBBAACDBDEEEEEFFF" #5A4B1C2D5E2F
 
     assert checkout(skus) == 515
+
