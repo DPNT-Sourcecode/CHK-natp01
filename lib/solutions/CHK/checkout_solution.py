@@ -99,9 +99,14 @@ def checkout(skus):
             num_of_item = contents[item]
 
             group_offer_count += num_of_item
+            print("Updated 1 = ", group_offer_count)
             total += group_offer_price * (group_offer_count // group_offer_quant)
+            print("Total updated by = ", group_offer_count // group_offer_quant, " elements")
             group_offer_count -= group_offer_count // group_offer_quant
+            print("Total back to = ", group_offer_count // group_offer_quant, " elements")
 
+
+            print(item, group_offer_count)
     #put the remaining quantity of items that were present in the group offer and the basket to the cheapest possible items
     found = False
     for item in group_offer_items[::-1]:
@@ -209,4 +214,5 @@ def test_simple_group_offer():
     skus = "STXYZ"
 
     assert checkout(skus) == 82
+
 
