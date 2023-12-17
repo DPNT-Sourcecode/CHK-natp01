@@ -94,8 +94,8 @@ def checkout(skus):
         # elif item == "F":
         #     total+= 10*num
 
-    if "F" in contents:
-        contents["F"] -= contents["F"] // 3
+    # if "F" in contents:
+    #     contents["F"] -= contents["F"] // 3
 
     for item in contents:
         num_of_item = contents[item]
@@ -112,10 +112,10 @@ def checkout(skus):
 
             contents[item] = 0
 
+            print(total)
             continue
 
         #Money Discount
-        #        "F":[(3,20)],
         elif item in special_offers_money:
             for discount in special_offers_money[item]:
                 total += (num_of_item // discount[0]) * discount[1]
@@ -123,9 +123,11 @@ def checkout(skus):
 
             total += prices[item] * num_of_item
 
+        #No discount
         else:
             total += prices[item] * num_of_item
 
+        print(total)
     return total
 
 def test_checkout():
@@ -189,3 +191,4 @@ def test_f():
     skus = "AAABBBAACDBDEEEEEFFF" #5A4B1C2D5E2F
 
     assert checkout(skus) == 515
+
