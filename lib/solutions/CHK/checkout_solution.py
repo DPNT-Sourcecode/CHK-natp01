@@ -100,11 +100,15 @@ def checkout(skus):
             total += group_offer_price * (group_offer_count // group_offer_quant)
             group_offer_count -= group_offer_count // group_offer_quant
 
+    #put the remaining quantity of items that were present in the group offer and the basket to the cheapest possible items
     found = False
     for item in group_offer_items[::-1]:
-        if not found:
-            if item in contents:
-                contents[item]
+        if item in contents:
+            if not found:
+                contents[item] = group_offer_count
+            else:
+                contents[item] = 0
+
     for item in contents:
         num_of_item = contents[item]
         if num_of_item == 0:
@@ -198,4 +202,9 @@ def test_random_checks():
     skus = 3*"A" + 10*"H" + 3*"R" + 4*"Q"
 
     assert checkout(skus) == 440
+
+def test_simple_group_offer():
+    skus = "STXYZ"
+
+    assert checkout(skus) == 45
 
