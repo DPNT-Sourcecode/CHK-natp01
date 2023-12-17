@@ -33,6 +33,8 @@ def checkout(skus):
         "Z" : 50
     }
 
+    #offers are stored in list of tuples where each tuple represents a possible offer, with the offer that is most beneficial for the customer being first
+
     # (A,B) quantity A for B money
     special_offers_money = {
         "A" : [(5,200),(3,130)],
@@ -97,8 +99,17 @@ def checkout(skus):
 
     for item in contents:
         num = contents[item]
-        if item not in special_offers:
+        if item not in special_offers_money and item not in special_offers_items:
             total += prices[item] * num
+        if item in special_offers_items:
+            num = contents[item]
+            total+= prices[item]*num
+            item_free_remove = contents[item] // special_offers_items["item"][0][0]
+
+            if special_offers_items["item"][0][1] in contents:
+                contents["B"] = contents["B"] - item_free_remove if contents["B"] > item_free_remove else  0
+
+            del contents["E"]
 
     return total
 
@@ -163,4 +174,5 @@ def test_f():
     skus = "AAABBBAACDBDEEEEEFFF" #5A4B1C2D5E2F
 
     assert checkout(skus) == 515
+
 
