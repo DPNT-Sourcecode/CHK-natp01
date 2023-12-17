@@ -46,6 +46,7 @@ def checkout(skus):
         elif item == 'D':
             total+= 15*num
         elif item == "F":
+            total+= 10*num
 
     return total
 
@@ -97,4 +98,13 @@ def more_complicated():
     skus = "AAABBBAACDBDEEEEE" #5A4B1C2D5E
 
     assert checkout(skus) == 495
+
+def test_f():
+    skus = "F" * 10
+
+    assert checkout(skus) == 70
+
+    skus = "AAABBBAACDBDEEEEEFFF" #5A4B1C2D5E
+
+    assert checkout(skus) == 515
 
