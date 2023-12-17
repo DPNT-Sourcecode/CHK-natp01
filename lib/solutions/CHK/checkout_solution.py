@@ -54,6 +54,8 @@ def checkout(skus):
         "N":[(3,"M")],
         "R":[(3,"Q")],
     }
+
+    group_offer_items = {"S","T","X","Y","Z"}
     
     contents = {}
 
@@ -90,6 +92,10 @@ def checkout(skus):
         num_of_item = contents[item]
         if num_of_item == 0:
             continue
+        
+        #Group Offer
+        if item in group_offer_items:
+
 
         #Money Discount
         elif item in special_offers_money:
@@ -179,6 +185,7 @@ def test_random_checks():
     skus = 3*"A" + 10*"H" + 3*"R" + 4*"Q"
 
     assert checkout(skus) == 440
+
 
 
 
