@@ -35,7 +35,7 @@ def checkout(skus):
 
 def test_checkout():
     skus = ""
-    assert checkout(skus) == -1
+    assert checkout(skus) == 0
 
     skus="a"
     assert checkout(skus) == -1
@@ -59,4 +59,7 @@ def test_checkout():
 
     skus += "BB"
     assert checkout(skus) == 240
+
+    skus = "ABCa"
+    assert checkout(skus) == -1
 
