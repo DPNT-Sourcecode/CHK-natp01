@@ -6,12 +6,15 @@ def checkout(skus):
     #assumre for now that SKUs are given in the format of capital letters seperated by NO spaces "AABBC"
     contents = {}
 
+    if not skus:
+        return 0
+
     if not isinstance(skus, str):
         return -1
     
     for el in skus:
         if el < 'A' or el > 'Z':
-            continue
+            return -1
         
         contents[el] = contents.get(el, 0) + 1
 
@@ -31,7 +34,7 @@ def checkout(skus):
     return total
 
 def test_checkout():
-    skus = []
+    skus = ""
     assert checkout(skus) == -1
 
     skus="a"
@@ -56,3 +59,4 @@ def test_checkout():
 
     skus += "BB"
     assert checkout(skus) == 240
+
