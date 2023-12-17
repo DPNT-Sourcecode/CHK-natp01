@@ -20,6 +20,13 @@ def checkout(skus):
 
     total = 0
 
+    if "E" in contents:
+        total+= 40*num
+        b_remove = E // 2
+
+        if "B" in contents:
+            contents["B"] = contents["B"] - b_remove 
+
     for item in contents:
         num = contents[item]
         if item == 'A':
@@ -62,4 +69,5 @@ def test_checkout():
 
     skus = "ABCa"
     assert checkout(skus) == -1
+
 
