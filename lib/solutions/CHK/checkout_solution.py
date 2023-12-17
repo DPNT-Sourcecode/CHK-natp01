@@ -72,6 +72,8 @@ def checkout(skus):
         
         contents[el] = contents.get(el, 0) + 1
 
+    total = 0
+
     #Free item discount
     #(for now this works only when the free items are not items that at a certain quantity have free items too since that can give inaccurate results)
     for item in special_offers_items:
@@ -206,5 +208,5 @@ def test_random_checks():
 def test_simple_group_offer():
     skus = "STXYZ"
 
-    assert checkout(skus) == 45
+    assert checkout(skus) == 82
 
