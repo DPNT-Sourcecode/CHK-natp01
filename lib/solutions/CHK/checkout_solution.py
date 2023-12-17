@@ -31,7 +31,9 @@ def checkout(skus):
 
     for item in contents:
         num = contents[item]
-        if item == 'A':
+        if item == 'A': # first apply 5A for 200 offer since it is a better deal for the customer
+            total += (num//5) * 200
+            num -= num // 5
             total += (num // 3) * 130 + (num % 3) * 50
         elif item == 'B':
             total += (num // 2) * 45 + (num % 2) * 30
@@ -72,9 +74,9 @@ def test_checkout():
     skus = "ABCa"
     assert checkout(skus) == -1
 
-def test_e_offer():
-    skus = "AAABBCEE"
+def test_new_a_offer():
+    skus = "AAAAAAAA"
 
-    assert checkout(skus) == 
+    assert checkout(skus) == 330
 
 
