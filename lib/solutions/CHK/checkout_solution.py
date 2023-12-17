@@ -104,7 +104,11 @@ def test_f():
 
     assert checkout(skus) == 70
 
-    skus = "AAABBBAACDBDEEEEEFFF" #5A4B1C2D5E
+    skus = "AAABBBAACDBDEEEEEFFF" #5A4B1C2D5E3F
+
+    assert checkout(skus) == 515
+
+    skus = "AAABBBAACDBDEEEEEFFF" #5A4B1C2D5E2F
 
     assert checkout(skus) == 515
 
