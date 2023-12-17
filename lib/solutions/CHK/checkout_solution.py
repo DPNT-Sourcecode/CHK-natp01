@@ -100,7 +100,11 @@ def checkout(skus):
             total += group_offer_price * (group_offer_count // group_offer_quant)
             group_offer_count -= group_offer_count // group_offer_quant
 
-
+    found = False
+    for item in group_offer_items[::-1]:
+        if not found:
+            if item in contents:
+                contents[item]
     for item in contents:
         num_of_item = contents[item]
         if num_of_item == 0:
@@ -194,3 +198,4 @@ def test_random_checks():
     skus = 3*"A" + 10*"H" + 3*"R" + 4*"Q"
 
     assert checkout(skus) == 440
+
