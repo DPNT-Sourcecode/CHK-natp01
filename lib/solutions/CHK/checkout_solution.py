@@ -55,7 +55,8 @@ def checkout(skus):
         "R":[(3,"Q")],
     }
 
-    group_offer_items = {"S","T","X","Y","Z"}
+    #list of items in the group offer begining with the most expensive to benefit the user
+    group_offer_items = ["Z","S","T","Y","X"]
     
     contents = {}
 
@@ -70,8 +71,6 @@ def checkout(skus):
             return -1
         
         contents[el] = contents.get(el, 0) + 1
-
-    total = 0
 
     #Free item discount
     #(for now this works only when the free items are not items that at a certain quantity have free items too since that can give inaccurate results)
@@ -88,14 +87,19 @@ def checkout(skus):
 
             contents[item] = 0
 
+    #Group offers
+    group_offer_count = 0
+    for item in group_offer_items:
+        if item in contents:
+            num_of_item = contents[item]
+
+            group_offer_count += 
+
+
     for item in contents:
         num_of_item = contents[item]
         if num_of_item == 0:
             continue
-        
-        #Group Offer
-        if item in group_offer_items:
-
 
         #Money Discount
         elif item in special_offers_money:
@@ -185,7 +189,3 @@ def test_random_checks():
     skus = 3*"A" + 10*"H" + 3*"R" + 4*"Q"
 
     assert checkout(skus) == 440
-
-
-
-
